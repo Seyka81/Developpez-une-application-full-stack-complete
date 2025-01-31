@@ -1,0 +1,26 @@
+<header [ngClass]="{ special: isAuth }">
+  <div class="left">
+    <img src="/assets/logo_p6.png" alt="logo" class="logo" />
+  </div>
+  <div class="right right-desktop" *ngIf="$isLogged() | async">
+    <nav>
+      <a routerLink="/articles" routerLinkActive="active-link">Articles</a>
+      <a routerLink="/themes" routerLinkActive="active-link">Thèmes</a>
+    </nav>
+    <img src="/assets/user.webp" alt="user" class="user-icon" />
+  </div>
+  <div class="right right-mobile" *ngIf="$isLogged() | async">
+    <img src="/assets/bar.png" alt="bar" class="bar" (click)="openNav()" />
+  </div>
+</header>
+<div
+  class="aside"
+  [ngClass]="{ special: isAuth && isNavOpen }"
+  *ngIf="isNavOpen"
+>
+  <nav>
+    <a routerLink="/articles" routerLinkActive="active-link">Articles</a>
+    <a routerLink="/themes" routerLinkActive="active-link">Thèmes</a>
+  </nav>
+  <img src="/assets/user.webp" alt="user" class="user-icon" />
+</div>
