@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.security;
+package com.mdd.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

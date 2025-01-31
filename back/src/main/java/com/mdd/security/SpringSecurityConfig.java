@@ -1,6 +1,6 @@
-package com.openclassrooms.mddapi.security;
+package com.mdd.security;
 
-import com.chatop.services.CustomUserDetailsService;
+import com.mdd.services.CustomUserDetailsService;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

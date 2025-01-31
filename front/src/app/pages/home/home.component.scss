@@ -1,7 +1,30 @@
 .center {
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+img {
+  width: 35%;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+}
+.button-section {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  height: 2rem;
+  button {
+    border-radius: 10px;
+    border: black 1px solid;
+    padding: 0 1.5rem 0 1.5rem;
+  }
+  :hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
 }

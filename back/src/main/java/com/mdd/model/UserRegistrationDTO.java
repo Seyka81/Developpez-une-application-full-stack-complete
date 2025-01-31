@@ -1,10 +1,10 @@
-package com.openclassrooms.mddapi.model;
+package com.mdd.model;
 
 import lombok.Data;
 
 @Data
 public class UserRegistrationDTO {
-    private String name;
+    private String username;
     private String email;
     private String password;
 }

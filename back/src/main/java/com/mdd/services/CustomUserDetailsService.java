@@ -1,6 +1,7 @@
-package com.openclassrooms.mddapi.services;
+package com.mdd.services;
 
-import com.chatop.repositories.UserRepository;
+import com.mdd.domain.Users;
+import com.mdd.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.chatop.domain.Users user = userRepository.findByEmail(username);
+        Users user = userRepository.findByEmail(username);
 
         return new User(user.getEmail(), user.getPassword(), Collections.emptyList());
     }

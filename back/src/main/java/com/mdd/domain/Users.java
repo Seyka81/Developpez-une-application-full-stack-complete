@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.domain;
+package com.mdd.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;

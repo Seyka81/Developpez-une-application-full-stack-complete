@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.services;
+package com.mdd.services;
 
 import java.util.ArrayList;
 import java.util.Optional;

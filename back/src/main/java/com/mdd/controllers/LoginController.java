@@ -1,8 +1,11 @@
-package com.openclassrooms.mddapi.controllers;
+package com.mdd.controllers;
 
-import com.openclassrooms.mddapi.model.UserLoginDTO;
-import com.openclassrooms.mddapi.security.JWTService;
-import com.openclassrooms.mddapi.services.UserService;
+import com.mdd.domain.Users;
+import com.mdd.model.UserDTO;
+import com.mdd.model.UserLoginDTO;
+import com.mdd.model.UserRegistrationDTO;
+import com.mdd.security.JWTService;
+import com.mdd.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +42,7 @@ public class LoginController {
     /**
      * Méthode de login
      * 
-     * @param loginData
+     * @param userLoginDTO
      * @return un token autorisant les requêtes vers l'API et un statut réponse 200
      */
     @PostMapping("/auth/login")
@@ -62,7 +65,7 @@ public class LoginController {
      * Méthode d'enregistrement d'un nouvel utilisateur en base de donnée après
      * avoir vérifié que l'email saisi n'existe pas déjà
      * 
-     * @param user
+     * @param registrationDTO
      * @return un token autorisant les requêtes vers l'API et un statut réponse 200
      */
 

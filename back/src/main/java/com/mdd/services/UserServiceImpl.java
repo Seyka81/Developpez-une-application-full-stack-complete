@@ -1,10 +1,10 @@
-package com.openclassrooms.mddapi.services;
+package com.mdd.services;
 
-import com.chatop.domain.Users;
-import com.chatop.model.UserDTO;
-import com.chatop.model.UserRegistrationDTO;
-import com.chatop.repositories.UserRepository;
-import com.chatop.security.JWTService;
+import com.mdd.domain.Users;
+import com.mdd.model.UserDTO;
+import com.mdd.model.UserRegistrationDTO;
+import com.mdd.repositories.UserRepository;
+import com.mdd.security.JWTService;
 
 import io.jsonwebtoken.Claims;
 
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
             }
         }
         user.setEmail(registrationDTO.getEmail());
-        user.setName(registrationDTO.getName());
+        user.setName(registrationDTO.getUsername());
         user.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
         user.setCreated_at(LocalDate.now());
         user.setUpdated_at(LocalDate.now());
