@@ -1,15 +1,17 @@
-package com.mdd.model;
+package com.mdd.dto;
 
 import lombok.Data;
 
 @Data
 public class UserDTO {
 
-    protected long id;
+    protected Integer id;
 
     private String name;
 
     private String email;
+
+    private String password;
 
     private String created_at;
 

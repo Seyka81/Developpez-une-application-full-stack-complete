@@ -1,0 +1,32 @@
+.article-card {
+  padding: 10px;
+  width: 359px;
+  height: 180px;
+  border: 1px solid #dfdddd;
+  border-radius: 8px;
+  font-family: Inter;
+  cursor: pointer;
+  @media screen and (max-width: 390px) {
+    width: 250px;
+  }
+  .title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 0.25rem;
+  }
+
+  .metadata {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 0.25rem;
+  }
+
+  .content {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

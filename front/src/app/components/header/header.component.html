@@ -1,26 +1,36 @@
-<header [ngClass]="{ special: isAuth }">
-  <div class="left">
-    <img src="/assets/logo_p6.png" alt="logo" class="logo" />
-  </div>
+<header [ngClass]="{ special: isNotAuth }">
+  <img src="../../../assets/logo_p6.png" alt="logo" class="left logo" />
+
   <div class="right right-desktop" *ngIf="$isLogged() | async">
     <nav>
+      <a class="disconnect" (click)="disconnect()">Se déconnecter</a>
       <a routerLink="/articles" routerLinkActive="active-link">Articles</a>
       <a routerLink="/themes" routerLinkActive="active-link">Thèmes</a>
     </nav>
-    <img src="/assets/user.webp" alt="user" class="user-icon" />
+    <a routerLink="/user">
+      <img src="/assets/user.webp" alt="user" class="user-icon" />
+    </a>
   </div>
   <div class="right right-mobile" *ngIf="$isLogged() | async">
-    <img src="/assets/bar.png" alt="bar" class="bar" (click)="openNav()" />
+    <img
+      src="../../../assets/bar.png"
+      alt="bar"
+      class="bar"
+      (click)="openNav()"
+    />
   </div>
 </header>
 <div
   class="aside"
-  [ngClass]="{ special: isAuth && isNavOpen }"
+  [ngClass]="{ special: isNotAuth && isNavOpen }"
   *ngIf="isNavOpen"
 >
   <nav>
+    <a class="disconnect" (click)="disconnect()">Se déconnecter</a>
     <a routerLink="/articles" routerLinkActive="active-link">Articles</a>
     <a routerLink="/themes" routerLinkActive="active-link">Thèmes</a>
   </nav>
-  <img src="/assets/user.webp" alt="user" class="user-icon" />
+  <a routerLink="/user">
+    <img src="/assets/user.webp" alt="user" class="user-icon" />
+  </a>
 </div>

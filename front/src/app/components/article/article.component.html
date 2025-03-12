@@ -1,0 +1,10 @@
+<div class="article-card" (click)="onArticleClick(article)">
+  <h2 class="title">{{ article.title }}</h2>
+  <div class="metadata">
+    <span class="date">Date: {{ article.createdAt | date }}</span>
+    <span class="author">Author: {{ article.author }}</span>
+  </div>
+  <p class="content">
+    {{ article.content }}
+  </p>
+</div>

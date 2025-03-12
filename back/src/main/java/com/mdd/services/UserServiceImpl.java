@@ -1,8 +1,8 @@
 package com.mdd.services;
 
-import com.mdd.domain.Users;
-import com.mdd.model.UserDTO;
-import com.mdd.model.UserRegistrationDTO;
+import com.mdd.domain.User;
+import com.mdd.dto.UserDTO;
+import com.mdd.dto.UserRegistrationDTO;
 import com.mdd.repositories.UserRepository;
 import com.mdd.security.JWTService;
 
@@ -33,9 +33,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<?> save(UserRegistrationDTO registrationDTO) {
-        Users user = new Users();
-        ArrayList<Users> users = this.findAllUsers();
-        for (Users u : users) {
+        User user = new User();
+        ArrayList<User> users = this.findAllUsers();
+        for (User u : users) {
             if (u.getEmail().equals(registrationDTO.getEmail())) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already in use");
             }
@@ -51,25 +51,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<Users> findUserById(long id) {
+    public Optional<User> findUserById(Integer id) {
         return userRepository.findById(id);
     }
 
     @Override
-    public Users findUserByEmail(String email) {
+    public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     @Override
-    public ArrayList<Users> findAllUsers() {
-        return userRepository.findAll();
+    public ArrayList<User> findAllUsers() {
+        return (ArrayList<User>) userRepository.findAll();
     }
 
     @Override
-    public Optional<Users> findUserByUsername(String username) {
+    public Optional<User> findUserByUsername(String username) {
         return Optional.ofNullable(userRepository.findByEmail(username));
     }
 
+    @Override
     public UserDTO findUserByToken(String token) {
         if (token.startsWith("Bearer ")) {
             token = token.substring(7);
@@ -77,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
         Claims claims = jwtService.parseToken(token);
         String username = claims.getSubject();
-        Optional<Users> userOptional = findUserByUsername(username);
+        Optional<User> userOptional = findUserByUsername(username);
 
         if (userOptional.isPresent()) {
             UserDTO userDTO = new UserDTO();
@@ -91,6 +92,22 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new RuntimeException("User not found");
         }
+    }
+
+    public Optional<User> editUser(Integer id, UserRegistrationDTO userRegistrationDTO) throws Exception {
+
+        System.out.println(userRegistrationDTO.getEmail() + ", " + userRegistrationDTO.getUsername() + ", " + userRegistrationDTO.getPassword() + ", " + LocalDate.now() + ", " + id);
+
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            userRepository.updateUser(userRegistrationDTO.getEmail(), userRegistrationDTO.getUsername(),
+                    passwordEncoder.encode(userRegistrationDTO.getPassword()), LocalDate.now(), id);
+
+        }else{
+            throw new Exception("User not found");
+        }
+
+        return userRepository.findById(id);
     }
 
 }

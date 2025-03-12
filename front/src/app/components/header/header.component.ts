@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  Input,
-  OnInit,
-} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, HostListener, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SessionService } from 'src/app/pages/services/session.service';
 
@@ -16,7 +9,7 @@ import { SessionService } from 'src/app/pages/services/session.service';
 })
 export class HeaderComponent {
   isNavOpen: boolean = false;
-  @Input() isAuth: boolean = false;
+  @Input() isNotAuth: boolean = false;
 
   constructor(private sessionService: SessionService) {}
 
@@ -38,5 +31,8 @@ export class HeaderComponent {
   }
   openNav() {
     this.isNavOpen = !this.isNavOpen;
+  }
+  disconnect() {
+    this.sessionService.logOut();
   }
 }

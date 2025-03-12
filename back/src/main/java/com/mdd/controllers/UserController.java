@@ -1,9 +1,9 @@
 package com.mdd.controllers;
 
-import com.mdd.domain.Users;
-import com.mdd.model.UserDTO;
-import com.mdd.model.UserLoginDTO;
-import com.mdd.model.UserRegistrationDTO;
+import com.mdd.domain.User;
+import com.mdd.dto.UserDTO;
+import com.mdd.dto.UserLoginDTO;
+import com.mdd.dto.UserRegistrationDTO;
 import com.mdd.security.JWTService;
 import com.mdd.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,22 +13,16 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-public class LoginController {
+public class UserController {
 
     @Autowired
     private JWTService jwtService;
@@ -40,8 +34,9 @@ public class LoginController {
     private UserService userService;
 
     /**
-     * Méthode de login
-     * 
+     * Méthode de connexion d'un utilisateur en base de donnée après avoir vérifié
+     * que l'email et le mot de passe saisis correspondent
+     *
      * @param userLoginDTO
      * @return un token autorisant les requêtes vers l'API et un statut réponse 200
      */
@@ -61,20 +56,19 @@ public class LoginController {
         }
     }
 
+
     /**
-     * Méthode d'enregistrement d'un nouvel utilisateur en base de donnée après
-     * avoir vérifié que l'email saisi n'existe pas déjà
-     * 
+     * Méthode de création d'un utilisateur en base de donnée
+     *
      * @param registrationDTO
      * @return un token autorisant les requêtes vers l'API et un statut réponse 200
      */
-
     @PostMapping("/auth/register")
     public ResponseEntity<?> register(@RequestBody UserRegistrationDTO registrationDTO) {
 
         try {
-            ArrayList<Users> users = userService.findAllUsers();
-            for (Users user : users) {
+            ArrayList<User> users = userService.findAllUsers();
+            for (User user : users) {
                 if (user.getEmail().equals(registrationDTO.getEmail())) {
                     return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists");
                 }
@@ -92,11 +86,10 @@ public class LoginController {
     }
 
     /**
-     * Méthode permettant de récupérer les informations d'un utilisateur à partir de
-     * son token
-     * 
+     * Méthode de récupération de l'utilisateur connecté
+     *
      * @param token
-     * @return les informations de l'utilisateur
+     * @return un statut réponse 200
      */
     @GetMapping("/auth/me")
     public ResponseEntity<UserDTO> getUserByToken(@RequestHeader("Authorization") String token) {
@@ -109,13 +102,13 @@ public class LoginController {
     }
 
     /**
-     * Méthode de récupération d'un User par son id
-     * 
+     * Méthode de récupération de l'utilisateur par son id
+     *
      * @param id
      * @return un statut réponse 200
      */
     @GetMapping("/user/{id}")
-    public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
+    public ResponseEntity<UserDTO> getUser(@PathVariable Integer id) {
         return userService.findUserById(id)
                 .map(user -> {
                     UserDTO userDto = new UserDTO();
@@ -128,6 +121,22 @@ public class LoginController {
                     return ResponseEntity.status(HttpStatus.OK).body(userDto);
                 })
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+    }
+
+    /**
+     * Méthode de suppression de l'utilisateur par son id
+     *
+     * @param id
+     * @return un statut réponse 200
+     */
+    @PutMapping("/auth/edit/{id}")
+    public ResponseEntity<?> editUser(@PathVariable Integer id, @RequestBody UserRegistrationDTO userRegistrationDTO) {
+        try {
+            Optional<User> user =userService.editUser(id, userRegistrationDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(user);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating user");
+        }
     }
 
 }
