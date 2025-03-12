@@ -2,8 +2,6 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
 
-It is a starter project for managing and displaying information related to the Mdd.
-
 This project use [ngx-charts](https://swimlane.gitbook.io/ngx-charts) for data visualization and [Font Awesome](https://fontawesome.com/) for iconography.
 
 ## Prerequisites
