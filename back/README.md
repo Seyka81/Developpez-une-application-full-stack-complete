@@ -1,6 +1,6 @@
-# Backend - Chatop API
+# Backend - Mdd API
 
-Ce projet est une API pour la gestion de locations immobilières, développée avec **Spring Boot**. Elle prend en charge la gestion des utilisateurs, des annonces, et des interactions.
+Ce projet est une API pour la gestion de locations immobilières, développée avec **Spring Boot**. Elle prend en charge la gestion des utilisateurs, des articles et des themes, et des interactions.
 
 ## **Prérequis**
 
