@@ -1,0 +1,8 @@
+<app-header [isNotAuth]="false"></app-header>
+<main class="themes">
+  <app-theme
+    *ngFor="let theme of themes.getValue()"
+    [theme]="theme"
+    (themeClicked)="themeClick(theme)"
+  ></app-theme>
+</main>

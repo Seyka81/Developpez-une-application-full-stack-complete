@@ -13,11 +13,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  public onError = false;
-  public form = this.formBuilder.group({
+  onError = false;
+  form = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     username: ['', [Validators.required, Validators.min(3)]],
-    password: ['', [Validators.required, Validators.min(3)]],
+    password: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).+$/),
+      ],
+    ],
   });
 
   constructor(
@@ -27,7 +34,7 @@ export class RegisterComponent {
     private sessionService: SessionService
   ) {}
 
-  public submit(): void {
+  submit(): void {
     const registerRequest = this.form.value as RegisterRequest;
     this.authService.register(registerRequest).subscribe({
       next: (response: AuthSuccess) => {
@@ -35,7 +42,7 @@ export class RegisterComponent {
         this.authService.me().subscribe({
           next: (user: User) => {
             this.sessionService.logIn(user);
-            this.router.navigate(['login']);
+            this.router.navigate(['articles']);
           },
           error: () => {
             console.error((this.onError = true));

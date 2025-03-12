@@ -2,24 +2,26 @@ package com.mdd.services;
 
 import java.util.ArrayList;
 import java.util.Optional;
-import com.mdd.model.UserDTO;
+import com.mdd.dto.UserDTO;
 
 import org.springframework.http.ResponseEntity;
 
-import com.mdd.domain.Users;
-import com.mdd.model.UserRegistrationDTO;
+import com.mdd.domain.User;
+import com.mdd.dto.UserRegistrationDTO;
 
 public interface UserService {
 
     ResponseEntity<?> save(UserRegistrationDTO registrationDTO);
 
-    Optional<Users> findUserById(long id);
+    Optional<User> findUserById(Integer id);
 
-    Users findUserByEmail(String email);
+    User findUserByEmail(String email);
 
-    ArrayList<Users> findAllUsers();
+    ArrayList<User> findAllUsers();
 
-    Optional<Users> findUserByUsername(String username);
+    Optional<User> findUserByUsername(String username);
 
     UserDTO findUserByToken(String token);
+
+    Optional<User> editUser(Integer id, UserRegistrationDTO userRegistrationDTO) throws Exception;
 }

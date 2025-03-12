@@ -16,6 +16,10 @@ img {
   justify-content: space-around;
   width: 70%;
   height: 2rem;
+  @media screen and (max-width: 390px) {
+    width: 90%;
+    gap: 0.5rem;
+  }
   button {
     border-radius: 10px;
     border: black 1px solid;

@@ -1,9 +1,10 @@
-package com.mdd.model;
+package com.mdd.dto;
 
 import lombok.Data;
 
 @Data
-public class UserLoginDTO {
+public class UserRegistrationDTO {
+    private String username;
     private String email;
     private String password;
 }

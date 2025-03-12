@@ -1,1 +1,52 @@
-<app-header [isAuth]="false"></app-header>
+<app-header [isNotAuth]="false"></app-header>
+<main>
+  <div *ngIf="!isViewArticle">
+    <button routerLink="/newarticle">Créer un article</button>
+    <div class="articles">
+      <app-article
+        *ngFor="let article of articles"
+        [article]="article"
+        (articleClicked)="articleClick(article)"
+      ></app-article>
+    </div>
+  </div>
+  <div class="article-view" *ngIf="isViewArticle && articleSelected">
+    <div class="article-header">
+      <div>
+        <button class="back-button" (click)="isViewArticle = !isViewArticle">
+          ←
+        </button>
+      </div>
+      <h2 class="title">{{ articleSelected.title }}</h2>
+    </div>
+    <div class="article-container">
+      <div class="metadata">
+        <span>{{ articleSelected.createdAt | date }}</span>
+        <span>{{ articleSelected.author }}</span>
+        <span>{{ articleSelected.theme }}</span>
+      </div>
+
+      <p class="content">
+        {{ articleSelected.content }}
+      </p>
+      <hr />
+      <h3>Commentaires</h3>
+      <div *ngFor="let comment of comments.getValue()" class="comments">
+        <p>{{ comment.author }}</p>
+        <p class="comment-content">{{ comment.content }}</p>
+      </div>
+      <div class="comment-form">
+        <textarea
+          type="text"
+          [(ngModel)]="newComment"
+          placeholder="Écrivez ici votre commentaire"
+        >
+        </textarea>
+
+        <button class="send-button" (click)="addComment()">
+          <img src="../../../assets/icon _send.png" />
+        </button>
+      </div>
+    </div>
+  </div>
+</main>

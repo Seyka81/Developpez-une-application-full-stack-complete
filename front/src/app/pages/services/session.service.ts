@@ -35,7 +35,7 @@ export class SessionService {
     this.user = undefined;
     this.isLogged = false;
     this.next();
-    this.router.navigate(['login']);
+    this.router.navigate(['home']);
   }
 
   private next(): void {

@@ -7,6 +7,10 @@ header {
   padding-block: 0.5rem;
   border-bottom: 1px solid black;
   justify-content: space-between;
+
+  .bar {
+    padding-right: 1rem;
+  }
   .left {
     padding-left: 0.5rem;
     height: 100%;
@@ -21,16 +25,20 @@ header {
     gap: 20px;
 
     &-mobile {
-      @media screen and (min-width: 390px) {
+      @media screen and (max-width: 390px) {
+        display: flex;
+      }
+      @media screen and (min-width: 391px) {
         display: none;
       }
     }
+
     &-desktop {
-      @media screen and (min-width: 390px) {
-        display: flex;
-      }
       @media screen and (max-width: 390px) {
         display: none;
+      }
+      @media screen and (min-width: 391px) {
+        display: flex;
       }
     }
   }
@@ -43,6 +51,7 @@ header {
   }
   .user-icon {
     border-radius: 50%;
+    padding-right: 0.25rem;
     border: 1px solid #ddd;
     vertical-align: center;
     align-items: center;
@@ -99,6 +108,12 @@ nav a {
   color: black;
   font-size: 16px;
 }
+
+.disconnect {
+  color: #a40f0f !important;
+  cursor: pointer;
+}
+
 .active-link {
   color: #6c5ccf !important;
 }

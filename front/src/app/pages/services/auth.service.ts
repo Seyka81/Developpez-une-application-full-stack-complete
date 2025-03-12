@@ -31,4 +31,15 @@ export class AuthService {
   public me(): Observable<User> {
     return this.httpClient.get<User>(`${this.pathService}/me`);
   }
+
+  editprofile(
+    id: number,
+    value: Partial<{
+      email: string | null;
+      username: string | null;
+      password: string | null;
+    }>
+  ): Observable<User> {
+    return this.httpClient.put<User>(`${this.pathService}/edit/${id}`, value);
+  }
 }

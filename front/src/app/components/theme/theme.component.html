@@ -1,0 +1,20 @@
+<div class="theme-card">
+  <h2 class="title">{{ theme.name }}</h2>
+  <p class="content">
+    {{ theme.description }}
+  </p>
+  <button
+    *ngIf="theme.subscription && router.url === '/user'"
+    (click)="btnClicked()"
+  >
+    Se désabonner
+  </button>
+  <button
+    *ngIf="theme.subscription && router.url !== '/user'"
+    [disabled]="theme.subscription"
+    (click)="btnClicked()"
+  >
+    Déjà abonné
+  </button>
+  <button *ngIf="!theme.subscription" (click)="btnClicked()">S’abonner</button>
+</div>
