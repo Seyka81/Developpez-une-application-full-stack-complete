@@ -1,7 +1,15 @@
 <app-header [isNotAuth]="false"></app-header>
 <main>
   <div *ngIf="!isViewArticle">
-    <button routerLink="/newarticle">Créer un article</button>
+    <div class="button">
+      <button routerLink="/newarticle">Créer un article</button>
+      <button
+        [ngClass]="ordre === 'asc' ? 'trierU' : 'trierD'"
+        (click)="filter()"
+      >
+        Trier par
+      </button>
+    </div>
     <div class="articles">
       <app-article
         *ngFor="let article of articles"

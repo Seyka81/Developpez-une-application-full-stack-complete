@@ -17,11 +17,13 @@ export class ArticlesComponent implements OnInit {
   articles: articleResponse[] = [];
   isViewArticle = false;
   articleSelected: articleResponse | null = null;
+  ordre: string = 'asc';
   ngOnInit(): void {
     this.articlesService
       .getAllArticles()
       .subscribe((articles: articleResponse[]) => {
         this.articles = articles;
+        this.filter();
       });
   }
   articleClick(article: articleResponse) {
@@ -51,5 +53,22 @@ export class ArticlesComponent implements OnInit {
           });
         this.newComment = '';
       });
+  }
+  filter() {
+    if (this.ordre === 'desc') {
+      this.ordre = 'asc';
+    } else {
+      this.ordre = 'desc';
+    }
+    console.log(this.ordre);
+    if (this.ordre === 'desc') {
+      this.articles.sort((a, b) => {
+        return a.createdAt < b.createdAt ? 1 : -1;
+      });
+    } else {
+      this.articles.sort((a, b) => {
+        return a.createdAt > b.createdAt ? 1 : -1;
+      });
+    }
   }
 }
