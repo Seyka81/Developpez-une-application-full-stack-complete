@@ -35,7 +35,6 @@ export class NewarticleComponent implements OnInit {
   submitArticle() {
     this.articlesService.createArticle(this.article).subscribe((res) => {
       this.router.navigate(['/articles']);
-      console.log(res);
     });
   }
 }

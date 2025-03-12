@@ -96,14 +96,12 @@ public class UserServiceImpl implements UserService {
 
     public Optional<User> editUser(Integer id, UserRegistrationDTO userRegistrationDTO) throws Exception {
 
-        System.out.println(userRegistrationDTO.getEmail() + ", " + userRegistrationDTO.getUsername() + ", " + userRegistrationDTO.getPassword() + ", " + LocalDate.now() + ", " + id);
-
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             userRepository.updateUser(userRegistrationDTO.getEmail(), userRegistrationDTO.getUsername(),
                     passwordEncoder.encode(userRegistrationDTO.getPassword()), LocalDate.now(), id);
 
-        }else{
+        } else {
             throw new Exception("User not found");
         }
 
