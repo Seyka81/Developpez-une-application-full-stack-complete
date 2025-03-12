@@ -3,7 +3,13 @@
 
   <div class="right right-desktop" *ngIf="$isLogged() | async">
     <nav>
-      <a class="disconnect" (click)="disconnect()">Se déconnecter</a>
+      <a
+        class="disconnect"
+        (click)="disconnect()"
+        (keydown.enter)="disconnect()"
+        tabindex="0"
+        >Se déconnecter</a
+      >
       <a routerLink="/articles" routerLinkActive="active-link">Articles</a>
       <a routerLink="/themes" routerLinkActive="active-link">Thèmes</a>
     </nav>
@@ -17,6 +23,8 @@
       alt="bar"
       class="bar"
       (click)="openNav()"
+      (keydown.enter)="openNav()"
+      tabindex="0"
     />
   </div>
 </header>
@@ -26,7 +34,13 @@
   *ngIf="isNavOpen"
 >
   <nav>
-    <a class="disconnect" (click)="disconnect()">Se déconnecter</a>
+    <a
+      class="disconnect"
+      (click)="disconnect()"
+      (keydown.enter)="disconnect()"
+      tabindex="0"
+      >Se déconnecter</a
+    >
     <a routerLink="/articles" routerLinkActive="active-link">Articles</a>
     <a routerLink="/themes" routerLinkActive="active-link">Thèmes</a>
   </nav>

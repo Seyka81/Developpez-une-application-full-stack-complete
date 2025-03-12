@@ -10,14 +10,20 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./articles.component.scss'],
 })
 export class ArticlesComponent implements OnInit {
+  articles: articleResponse[] = [];
+  isViewArticle = false;
+  articleSelected: articleResponse | null = null;
+  ordre = 'asc';
+  comments: BehaviorSubject<articleComment[]> = new BehaviorSubject<
+    articleComment[]
+  >([]);
+  newComment = '';
+
   constructor(
     private articlesService: ArticlesService,
     private commentsService: CommentsService
   ) {}
-  articles: articleResponse[] = [];
-  isViewArticle = false;
-  articleSelected: articleResponse | null = null;
-  ordre: string = 'asc';
+
   ngOnInit(): void {
     this.articlesService
       .getAllArticles()
@@ -26,6 +32,7 @@ export class ArticlesComponent implements OnInit {
         this.filter();
       });
   }
+
   articleClick(article: articleResponse) {
     this.isViewArticle = true;
     this.articleSelected = article;
@@ -35,12 +42,6 @@ export class ArticlesComponent implements OnInit {
         this.comments.next(comments);
       });
   }
-
-  comments: BehaviorSubject<articleComment[]> = new BehaviorSubject<
-    articleComment[]
-  >([]);
-
-  newComment: string = '';
 
   addComment() {
     this.commentsService
@@ -54,6 +55,7 @@ export class ArticlesComponent implements OnInit {
         this.newComment = '';
       });
   }
+
   filter() {
     if (this.ordre === 'desc') {
       this.ordre = 'asc';

@@ -8,8 +8,8 @@ import { SessionService } from 'src/app/pages/services/session.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  isNavOpen: boolean = false;
-  @Input() isNotAuth: boolean = false;
+  isNavOpen = false;
+  @Input() isNotAuth = false;
 
   constructor(private sessionService: SessionService) {}
 
