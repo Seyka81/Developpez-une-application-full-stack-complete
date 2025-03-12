@@ -1,4 +1,9 @@
-<div class="article-card" (click)="onArticleClick(article)">
+<div
+  class="article-card"
+  (click)="onArticleClick(article)"
+  (keydown.enter)="onArticleClick(article)"
+  tabindex="0"
+>
   <h2 class="title">{{ article.title }}</h2>
   <div class="metadata">
     <span class="date">Date: {{ article.createdAt | date }}</span>

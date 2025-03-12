@@ -30,15 +30,6 @@ public class SubscriptionServiceImpl implements SubscriptionService{
     private ThemeRepository themeRepository;
 
 
-    public List<Integer> getThemeIdsForCurrentUser(String userEmail) {
-        User user = userRepository.findByEmail(userEmail);
-
-        List<Integer> themeId = subscriptionRepository.findThemeIdsByUserId(user.getId());
-        if(themeId.isEmpty()){
-            return Collections.emptyList();
-        }
-        return themeId;
-    }
 
     public void createSubscription(String userEmail, Integer themeId) {
         User user = userRepository.findByEmail(userEmail);

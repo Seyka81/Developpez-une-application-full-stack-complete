@@ -30,11 +30,11 @@ export class ThemesComponent implements OnInit {
 
   themeClick(theme: themeResponse) {
     if (theme.subscription) {
-      this.subscriptionService.unsubscribe(theme).subscribe((a) => {
+      this.subscriptionService.unsubscribe(theme).subscribe(() => {
         this.getThemes();
       });
     } else {
-      this.subscriptionService.subscribe(theme).subscribe((a) => {
+      this.subscriptionService.subscribe(theme).subscribe(() => {
         this.getThemes();
       });
     }

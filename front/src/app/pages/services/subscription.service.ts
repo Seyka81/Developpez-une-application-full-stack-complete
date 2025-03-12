@@ -11,8 +11,8 @@ export class SubscriptionService {
 
   constructor(private httpClient: HttpClient) {}
 
-  subscribe(theme: themeResponse): Observable<String> {
-    return this.httpClient.post<String>(this.subscriptionUrl, theme.id);
+  subscribe(theme: themeResponse): Observable<string> {
+    return this.httpClient.post<string>(this.subscriptionUrl, theme.id);
   }
   unsubscribe(theme: themeResponse) {
     return this.httpClient.delete(`${this.subscriptionUrl}/${theme.id}`);

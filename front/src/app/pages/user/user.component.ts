@@ -53,7 +53,7 @@ export class UserComponent implements OnInit {
     });
   }
   themeUnsubscribe(theme: themeResponse) {
-    this.subscriptionService.unsubscribe(theme).subscribe((a) => {
+    this.subscriptionService.unsubscribe(theme).subscribe(() => {
       this.themesService.getThemes().subscribe((themes) => {
         this.themes = themes.filter((theme) => theme.subscription);
       });
@@ -64,6 +64,7 @@ export class UserComponent implements OnInit {
       .editprofile(this.user.id, this.form.value)
       .subscribe((user) => {
         this.user = user;
+        this.form.get('password')?.reset();
       });
   }
 }
