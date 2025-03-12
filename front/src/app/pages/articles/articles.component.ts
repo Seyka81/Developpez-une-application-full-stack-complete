@@ -60,7 +60,6 @@ export class ArticlesComponent implements OnInit {
     } else {
       this.ordre = 'desc';
     }
-    console.log(this.ordre);
     if (this.ordre === 'desc') {
       this.articles.sort((a, b) => {
         return a.createdAt < b.createdAt ? 1 : -1;
